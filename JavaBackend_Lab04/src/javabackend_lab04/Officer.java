@@ -34,8 +34,8 @@ public class Officer extends Employee {
     }
 
     @Override
-    public void DisplayInformation() {
-        super.DisplayInformation(); //To change body of generated methods, choose Tools | Templates.
+    public void displayInformation() {
+        super.displayInformation(); //To change body of generated methods, choose Tools | Templates.
         System.out.println("coefficient" + this.coefficient);
     }
 
@@ -48,3 +48,4 @@ public class Officer extends Employee {
     
     
 }
+
