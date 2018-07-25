@@ -5,6 +5,7 @@
  */
 package javabackend_lab04;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -12,14 +13,14 @@ import java.util.Scanner;
  * @author ngomi
  */
 public class Manager extends Employee {
-    private int NumberEmployee;
+    private int numberEmployee;
 
     public int getNumberEmployee() {
-        return NumberEmployee;
+        return numberEmployee;
     }
 
     public void setNumberEmployee(int NumberEmployee) {
-        this.NumberEmployee = NumberEmployee;
+        this.numberEmployee = NumberEmployee;
     }
 
     public Manager() {
@@ -27,25 +28,25 @@ public class Manager extends Employee {
     }
 
     @Override
-    public void DisplayInformation() {
-        super.DisplayInformation(); //To change body of generated methods, choose Tools | Templates.
-        System.out.println("Number Employee" + this.NumberEmployee);
+    public void displayInformation() {
+        super.displayInformation(); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Number Employee" + this.numberEmployee);
     }
 
     @Override
     public void inputData() {
         super.inputData(); //To change body of generated methods, choose Tools | Templates.
         System.out.println("input Number Employee");
-        this.NumberEmployee = new Scanner(System.in).nextInt();
+        this.numberEmployee = new Scanner(System.in).nextInt();
     }
 
     @Override
     public float salary() {
         float salary;
-        if ( this.NumberEmployee <10 ){
+        if ( this.numberEmployee <10 ){
             salary = this.salary + 500;
         }else {
-            if( this.NumberEmployee < 20)
+            if( this.numberEmployee < 20)
                 salary = this.salary + 1000;
             else
                 salary = this.salary + 2000;
@@ -54,8 +55,7 @@ public class Manager extends Employee {
         return salary(); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-    
+   
 
     
 }
