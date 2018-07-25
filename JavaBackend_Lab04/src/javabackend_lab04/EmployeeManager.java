@@ -13,9 +13,8 @@ import java.util.Scanner;
  * @author ngomi
  */
 public class EmployeeManager {
-    public ArrayList<Officer> listOfficer;
-    public ArrayList<Worker> listWorker;
-    public ArrayList<Manager> listManager;
+    public ArrayList<Employee> listObject;
+    public ArrayList<Integer> listIndexEmployee;
     public void inputListEmployee(){
         System.out.println("nhap so nhan vien");
         int number  = new Scanner(System.in).nextInt();
@@ -24,175 +23,91 @@ public class EmployeeManager {
             int type = new Scanner(System.in).nextInt();
             switch (type){
                 case 1:
-                    Officer officer = new Officer();
-                    officer.inputData();
-                    listOfficer.add(officer);
+                    Employee e1 =  new Officer();
+                    e1.inputData();
+                    listObject.add(e1);
+                    listIndexEmployee.add(1);
                     break;
                 case 2:
-                    Worker worker = new Worker();
-                    worker.inputData();
-                    listWorker.add(worker);
+                    Employee e2 =  new Worker();
+                    e2.inputData();
+                    listObject.add(e2);
+                    listIndexEmployee.add(2);
                     break;
                 case 3:
-                    Manager manager = new Manager();
-                    manager.inputData();
-                    listManager.add(manager);
+                    Employee e3 =  new Officer();
+                    e3.inputData();
+                    listObject.add(e3);
+                    listIndexEmployee.add(3);
                     break;
             }   
         }
     }
     public void disPlayEmployee(){
-         if( ! this.listOfficer.isEmpty()){
-            for (int i = 0; i < this.listOfficer.size(); i++) {
-                Officer office = listOfficer.get(i);
-                if (office != null) {
-                    System.out.println("Nhan vien van phong thu " + i );
-                    office.DisplayInformation();;
+         if( ! this.listObject.isEmpty()){
+            for (int i = 0; i < this.listObject.size(); i++) {
+                if (listObject.get(i) != null) {
+                    System.out.println("Nhan vien thu " + i );
+                    listObject.get(i).DisplayInformation();;
                 }
+            }
+    }
+        
+        
+    }
+    public Employee searchBySalaryAndIndexEmployee(int indexEmployee){
+        Employee employee = new Employee();
+        for (int i = 0; i < listIndexEmployee.size(); i++) {
+            if (listIndexEmployee.get(i)==indexEmployee){
+                employee = listObject.get(i);
+                break;
             }
         }
         
-        if( ! this.listWorker.isEmpty()){
-            for (int i = 0; i < this.listWorker.size(); i++) {
-                Worker worker = listWorker.get(i);
-                if (worker != null) {
-                    System.out.println("Cong nhan thu  " + i );
-                    worker.DisplayInformation();;
+        for (int i = 1; i < listObject.size(); i++) {
+            if (listObject.get(i).gender.getCode()==indexEmployee){
+                if(listObject.get(i).salary()>employee.salary()){
+                    employee =listObject.get(i);
                 }
+            }
+        }
+        return employee;
+    }
+   
+  
+    public Employee searchBySalaryAndGender(int genderCode){
+        Employee employee =new Employee();
+        for (int i = 0; i < listObject.size(); i++) {
+            if (listObject.get(i).gender.getCode()== genderCode){
+                employee = listObject.get(i);
+                break;
             }
         }
        
-        if( ! this.listManager.isEmpty()){
-            for (int i = 0; i < this.listManager.size(); i++) {
-                Manager manager = listManager.get(i);
-                if (manager != null) {
-                    System.out.println("Quan ly thu  " + i );
-                    manager.DisplayInformation();;
+        for (int i = 1; i < listObject.size(); i++) {
+            if (listObject.get(i).gender.getCode()==genderCode){
+                if(listObject.get(i).salary()>employee.salary()){
+                    employee =listObject.get(i);
                 }
             }
         }
-    }
-    public Officer searchOfficerbySalary(){
-        Officer officerofSalaryMax = this.listOfficer.get(0);
-        for (int i = 1; i < listOfficer.size(); i++) {
-            if( officerofSalaryMax.salary() < listOfficer.get(i).salary()){
-                officerofSalaryMax = listOfficer.get(i);
-            }
-        }
-        return officerofSalaryMax;
-    }
-     public Worker searchWorkerBySalary(){
-        Worker workofSalaryMax = this.listWorker.get(0);
-        for (int i = 1; i < listWorker.size(); i++) {
-            if( workofSalaryMax.salary() < listWorker.get(i).salary()){
-                workofSalaryMax = listWorker.get(i);
-            }
-        }
-        return workofSalaryMax;
-    }
-      public Manager searchManagerBySalary(){
-        Manager managerOfSalaryMax = this.listManager.get(0);
-        for (int i = 1; i < listManager.size(); i++) {
-            if( managerOfSalaryMax.salary() < listManager.get(i).salary()){
-                managerOfSalaryMax = listManager.get(i);
-            }
-        }
-        return managerOfSalaryMax;
-    }
-    public void searchEmployeeBySalaryAndGender(int numberSelectByGender){
-        Officer officerByGender = new Officer();
-        officerByGender.setSalary(0);
-        officerByGender.setCoefficient(0);
-        for (int i = 0; i < this.listOfficer.size(); i++) {
-            if (this.listOfficer.get(i).gender.getCode()==numberSelectByGender){
-                if(this.listOfficer.get(i).salary()>officerByGender.salary()){
-                    officerByGender = this.listOfficer.get(i);
-                }
-            }
-        }
-        Worker workerByGender = new Worker();
-        workerByGender.setSalary(0);
-        workerByGender.setNumberOfWorkDays(0);
-        for (int i = 0; i < this.listWorker.size(); i++) {
-            if (this.listWorker.get(i).gender.getCode()==numberSelectByGender){
-                if(this.listWorker.get(i).salary()>officerByGender.salary()){
-                    workerByGender = this.listWorker.get(i);
-                }
-            }
-        }
-        
-        Manager managerByGender = new Manager();
-        managerByGender.setSalary(numberSelectByGender);
-        managerByGender.setNumberEmployee(numberSelectByGender);
-        for (int i = 0; i < this.listManager.size(); i++) {
-            if (this.listManager.get(i).gender.getCode()==numberSelectByGender){
-                if(this.listOfficer.get(i).salary()>officerByGender.salary()){
-                    managerByGender = this.listManager.get(i);
-                }
-            }
-        }
-        float maxSalary = officerByGender.salary();
-        if( workerByGender.salary() > maxSalary){
-            if( workerByGender.salary() >= managerByGender.salary()){
-                workerByGender.DisplayInformation();
-            }else {
-                managerByGender.DisplayInformation();
-            }
-        }else {
-            if( managerByGender.salary() >= maxSalary){
-                managerByGender.DisplayInformation();
-            }else{
-                officerByGender.DisplayInformation();
-            }
-        }
-        
+        return employee;
     }
     public void searchEmployeeBySalary(){
         System.out.println(" Nhập 1- để tìm kiems nhân viên có lương cao nhất theo vị trí , khác 1 - để tìm "
                 + "kiếm nhân viên có lương cao nhất theo giới tính");
         int numberSelect = new Scanner(System.in).nextInt();
         if ( numberSelect == 1){
-            System.out.println(" Nhập 1 để tìm nv van phòng có lương cao nhât , 0- để tìm công nhân có lương cao nhất ,"
-                    + "-1 để tìm manager có lương cao nhất");
-            int numberSelectByLevel = new Scanner(System.in).nextInt();
-            switch (numberSelectByLevel) {
-                case 1:
-                    Officer officer = searchOfficerbySalary();
-                    System.out.println("Nhân viên văn phòng có lương cao nhất là");
-                    officer.DisplayInformation();
-                    break;
-                case 0 :
-                    Worker worker = searchWorkerBySalary();
-                    System.out.println("Công nhân có lương cao nhất");
-                    worker.DisplayInformation();
-                    break;
-                case -1 :
-                    Manager manager = searchManagerBySalary();
-                    System.out.println("Manager có lương cao nhất");
-                    manager.DisplayInformation();
-                    break;
-            }
+            System.out.println(" Nhập 1 để tìm nv van phòng có lương cao nhât , 2 để tìm công nhân có lương cao nhất ,"
+                    + "3 để tìm manager có lương cao nhất");
+            int indexEmployee = new Scanner(System.in).nextInt();
+            Employee employee = searchBySalaryAndIndexEmployee(indexEmployee);
         }else {
             System.out.println(" Nhập 1 để tìm nhân viên nam có lương cao nhất , -1 để tìm nhân viên không xác đinh giới tính "
                     + " lương cao nhất 0 để tìm nhân viên nữ có lương cao nhất ");
-            int numberSelectByGender = new Scanner(System.in).nextInt();
-            switch (numberSelectByGender) {
-                case 1:
-                    System.out.println("Nhân viên Nam có lương cao nhất là");
-                    searchEmployeeBySalaryAndGender(numberSelectByGender);
-                    break;
-                case 0 :
-                    System.out.println("Nhân viên Nữ có lương cao nhất là ");
-                    searchEmployeeBySalaryAndGender(numberSelectByGender);
-                    break;
-                case -1:
-                    System.out.println("Nhân viên Không xác định giới tính  có lương cao nhất là ");
-                    searchEmployeeBySalaryAndGender(numberSelectByGender);
-                    break;
-                    
-                    
-                   
-            }
+            int genderCode = new Scanner(System.in).nextInt();
+            Employee e = searchBySalaryAndGender(genderCode);
+            e.DisplayInformation();
         }
         
     }
