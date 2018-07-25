@@ -5,6 +5,7 @@
  */
 package javabackend_lab04;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -81,13 +82,12 @@ public class Employee {
         System.out.println("input salary");
         this.salary = new Scanner(System.in).nextFloat();
     }
-    public void DisplayInformation(){
+    public void displayInformation(){
         System.out.println("id :" + this.id + "name :" + this.name + "gender :" + this.gender.getName());
     }
     public float salary(){
         float salary = 0;
         return salary;
     }
-    
     
 }
