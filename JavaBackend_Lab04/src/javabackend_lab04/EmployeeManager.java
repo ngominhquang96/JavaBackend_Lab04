@@ -48,7 +48,7 @@ public class EmployeeManager {
             for (int i = 0; i < this.listObject.size(); i++) {
                 if (listObject.get(i) != null) {
                     System.out.println("Nhan vien thu " + i );
-                    listObject.get(i).DisplayInformation();;
+                    listObject.get(i).displayInformation();;
                 }
             }
     }
@@ -107,7 +107,7 @@ public class EmployeeManager {
                     + " lương cao nhất 0 để tìm nhân viên nữ có lương cao nhất ");
             int genderCode = new Scanner(System.in).nextInt();
             Employee e = searchBySalaryAndGender(genderCode);
-            e.DisplayInformation();
+            e.displayInformation();
         }
         
     }
