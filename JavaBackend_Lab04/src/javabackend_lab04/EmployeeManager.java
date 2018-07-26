@@ -65,7 +65,7 @@ public class EmployeeManager {
         }
         
         for (int i = 1; i < listObject.size(); i++) {
-            if (list==indexEmployee){
+            if (listIndexEmployee.get(i)==indexEmployee){
                 if(listObject.get(i).salary()>employee.salary()){
                     employee =listObject.get(i);
                 }
